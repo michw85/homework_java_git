@@ -13,15 +13,15 @@ public class Main {
                         new Task(2, "Python project", Status.IN_PROGESS, 3),
                         new Task(3, "JS project", Status.COMPLETED, 7))),
                 new Programmer("John", "Berlin", List.of(
-                        new Task(1, "Python project", Status.CANCELED, 1),
-                        new Task(2, "Java project", Status.OPEN, 2))),
+                        new Task(4, "Python project", Status.CANCELED, 1),
+                        new Task(5, "Java project", Status.OPEN, 2))),
                 new Programmer("Ann", "Bremen", List.of(
-                        new Task(1, "C++ project", Status.OPEN, 1),
-                        new Task(2, "JS project", Status.IN_PROGESS, 3),
-                        new Task(3, "Python project", Status.COMPLETED, 5),
-                        new Task(4, "Java project", Status.OPEN, 2))),
+                        new Task(6, "C++ project", Status.OPEN, 1),
+                        new Task(7, "JS project", Status.IN_PROGESS, 3),
+                        new Task(8, "Python project", Status.COMPLETED, 5),
+                        new Task(9, "Java project", Status.OPEN, 2))),
                 new Programmer("Lena", "Dresden", List.of(
-                        new Task(1, "С# project", Status.COMPLETED, 10)))
+                        new Task(10, "С# project", Status.COMPLETED, 10)))
         );
 
         System.out.println("Map<String, Integer> ключ -> имя программиста, значение -> количество задач в списке у данного программиста\n");
@@ -33,10 +33,21 @@ public class Main {
 
         // ToDo Не совсем то - значение List<Task>, а надо только Task - в противном случае возникает конфликт, т.к. номера не уникальны
         System.out.println("\nMap<Integer, Task> где ключ, это номер задачи, а значение сама задача\n");
-        Map<Integer, List<Task>> collect2 = programmerList
+        /*Map<Integer, List<Task>> collect2 = programmerList
                 .stream()
                 .flatMap(p -> p.getTasks().stream())
                 .collect(Collectors.groupingBy(Task::getNumber));
+
+        print(collect2);
+         */
+        Map<Integer, Task> collect2 = programmerList
+                .stream()
+                .flatMap(p -> p.getTasks().stream())
+                .collect(Collectors.toMap(
+                        Task::getNumber,
+                        task -> task,
+                        (t1, t2) -> t1
+                ));
 
         print(collect2);
 
