@@ -31,8 +31,9 @@ public class Main {
 
         print(collect1);
 
-        // ToDo Не совсем то - значение List<Task>, а надо только Task - в противном случае возникает конфликт, т.к. номера не уникальны
+        
         System.out.println("\nMap<Integer, Task> где ключ, это номер задачи, а значение сама задача\n");
+        // значение List<Task>, а не Task
         /*Map<Integer, List<Task>> collect2 = programmerList
                 .stream()
                 .flatMap(p -> p.getTasks().stream())
